@@ -34,17 +34,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
     
   if (empty($_POST["date"])) {
-    $dateErr ="";
+    $dateErr = " Date is required";
   } else {
     $date = $_POST["date"];
-    // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
-    if (!filter_var($date, FILTER_VALIDATE_URL)) {
-      $dateErr = "Invalid URL format";
-    }
   }
 
   if (empty($_POST["blood"])) {
-    $bloodErr = "";
+    $bloodErr = "Blood group is required";
   } else {
     $blood = $_POST["blood"];
   }
@@ -73,12 +69,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   E-mail: <input type="text" name="email" value="<?php echo $email;?>">
   <span class="error">* <?php echo $emailErr;?></span>
   <br><br>
-  Date: <input type="date" name="begin"  placeholder="dd-mm-yyyy" value=""min="1953-01-01" max="1998-12-31"<?php echo $date;?>">
-  <span class="error"><?php echo $dateErr;?></span>
+  Date: <input type="date" name="date"  placeholder="dd-mm-yyyy" value=""min="1953-01-01" max="1998-12-31">
+  <span class="error">*<?php echo $dateErr;?></span>
   <br><br>
   Blood Group: 
   <select name="blood">
-  <option value="-1" selected>select..</option>
+  <option value="" selected>select..</option>
   <option value= "A+">A+</option>
   <option value= "A-">A-</option>
   <option value= "AB+">AB+</option>
@@ -87,14 +83,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <option value= "B-">B-</option>
   <option value= "O+">O+</option>
   <option value= "O-">O-</option>
+  <span class="error">*<?php echo $bloodErr;?></span>
 </select>
   <br><br>
   DEGREE :
   
-  <input type="checkbox" name="SSC" value="SSC" size="10">SSC
-  <input type="checkbox" name="HSC" value="HSC" size="10">HSC
-  <input type="checkbox" name="BSc" value="BSc" size="10">BSc
-  <input type="checkbox" name="MSc" value="MSc" size="10">MSc<br><br>
+  <input type="checkbox" name="SSC" value="SSC">SSC
+  <input type="checkbox" name="HSC" value="HSC" >HSC
+  <input type="checkbox" name="BSc" value="BSc" >BSc
+  <input type="checkbox" name="MSc"value="MSc" >MSc
+  <span class="error">* <?php echo $degreeErr;?></span>
+  <br><br>
 
 
   Gender:
